@@ -1,6 +1,6 @@
 # 🤝 Contributing / 贡献指南
 
-[Engineering handbook](docs/standards/README.md) · [工程手册](docs/standards/README.zh-CN.md)
+[Engineering handbook](docs/standards/README.md) · [工程手册](docs/standards/README.zh-CN.md) · [Licensing](docs/standards/LICENSING.md) · [许可证规范](docs/standards/LICENSING.zh-CN.md)
 
 维护者的低风险改动可以直接提交到 `main`。较大变更和外部贡献再使用 Pull Request。不要求独立审查者。
 

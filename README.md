@@ -10,6 +10,8 @@ These are practical recommendations for personal development, learning, and poss
 
 - [Engineering Handbook (English)](docs/standards/README.md)
 - [工程手册（简体中文）](docs/standards/README.zh-CN.md)
+- [Licensing Standard (English)](docs/standards/LICENSING.md)
+- [开源许可证统一规范（简体中文）](docs/standards/LICENSING.zh-CN.md)
 - [Contributing / 贡献指南](CONTRIBUTING.md)
 
 ## 🧭 Engineering Philosophy

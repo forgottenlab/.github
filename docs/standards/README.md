@@ -141,7 +141,7 @@ Use `README.md` and `README.zh-CN.md`, linked at the top, when both languages ar
 
 Add `CONTRIBUTING` when other people send changes. It can point to this handbook.
 
-A public repository should include a license file when the work is meant to be reused.
+A public repository should include a license file when the work is meant to be reused. See the [Licensing Standard](LICENSING.md) for how ForgottenLab chooses, declares, and reviews licenses. This `.github` repository does not license other projects.
 
 ## 10. 🔐 Security
 
