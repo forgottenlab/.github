@@ -1,12 +1,12 @@
-# ForgottenLab Engineering Handbook
+# 📘 ForgottenLab Engineering Handbook
 
 [English](README.md) | [简体中文](README.zh-CN.md)
 
 Lightweight Git and GitHub defaults for a solo maintainer. External contributors can use the same rules later. The same defaults fit Java, Python, web, and public repositories. The process stays small: no required reviewer, no required CI, and no release for every change.
 
-This handbook is guidance. It does not change GitHub settings or repository permissions. `CONTRIBUTING.md` points here. They become account defaults only after this repository is published as the public `.github` repository.
+This handbook is guidance, not automatic configuration of CI, branch protection, releases, or repository permissions. This public `.github` repository supplies supported default community health files, including contribution guidelines and Issue / Pull Request templates, to repositories owned by the account that lack their own corresponding files. The handbook itself is not automatically copied into other repositories. See [GitHub default community health file rules](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file).
 
-## 1. Terms
+## 1. 📖 Terms
 
 | Term | Meaning |
 |---|---|
@@ -20,7 +20,7 @@ This handbook is guidance. It does not change GitHub settings or repository perm
 | Release | A GitHub page that presents a tagged version |
 | Package | A published library or build, only when a project needs one |
 
-## 2. Everyday Git
+## 2. 🛠️ Everyday Git
 
 1. `git status`
 2. `git diff`
@@ -35,7 +35,7 @@ Low-risk owner work can go straight to `main`: documentation, a typo, or a small
 
 Use a branch for work that is large, experimental, easy to discard, or meant for someone else to read first.
 
-## 3. Branches
+## 3. 🌿 Branches
 
 `main` is the primary branch and can receive direct low-risk commits.
 
@@ -50,7 +50,7 @@ A clear name without a prefix is fine. Push a branch when you want a backup, ano
 
 Versions are marked with tags. Long-lived release branches are not needed by default; individual projects may add them when necessary.
 
-## 4. Commits
+## 4. 🧾 Commits
 
 Use a lightweight [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) subject:
 
@@ -78,7 +78,7 @@ fix: handle a missing output directory
 docs: clarify when to tag a version
 ```
 
-## 5. Issues
+## 5. 💬 Issues
 
 Use a title that describes the problem or request:
 
@@ -86,13 +86,13 @@ Use a title that describes the problem or request:
 Export fails when the output directory is missing
 ```
 
-Record the category with GitHub Issue Types. Personal accounts default to Bug, Task, and Feature. Choose the type on the issue. Leave prefixes such as `[Bug]`, `bug:`, or `docs:` out of the title.
+Record the category with GitHub Issue Types. Prefer native types where available, such as Bug, Task, and Feature. Choose an available type on the issue. Leave prefixes such as `[Bug]`, `bug:`, or `docs:` out of the title.
 
 Keep labels few. Add a label only when the type and title do not already say it. The forms in this repository do not add labels.
 
-This repository includes short Bug, Feature, and Task forms in `.github/ISSUE_TEMPLATE/`. Each form sets the issue type and leaves the title empty. A blank issue stays available. A repository that already has `.github/ISSUE_TEMPLATE/` keeps its own forms.
+This repository includes short Bug, Feature, and Task forms in `.github/ISSUE_TEMPLATE/`. Each form sets the issue type and leaves the title empty. A blank issue stays available. If a repository defines valid issue templates or template configuration in its own `.github/ISSUE_TEMPLATE/`, GitHub uses that local configuration instead of the entire default template folder.
 
-## 6. Pull requests
+## 6. 🤝 Pull requests
 
 A pull request is optional for ordinary solo work.
 
@@ -100,7 +100,7 @@ Open one for a substantial change, a checkpoint before merging, or an external c
 
 `.github/pull_request_template.md` only prefills that description. It does not require a review.
 
-## 7. Checks and automation
+## 7. 🧪 Checks and automation
 
 Add GitHub Actions when a repository benefits from a repeatable check. A small or early repository can stay without CI. Before a meaningful release, run the checks the project already has, even when there is no Actions workflow.
 
@@ -108,7 +108,7 @@ A green check means those commands passed in that run. Tagging, publishing a Rel
 
 Start with one useful job. Add more only for a real need.
 
-## 8. Versions and releases
+## 8. 📦 Versions and releases
 
 Tag a version when it is meaningful to you or to a user. Skip tags for typos, private notes, and unfinished work.
 
@@ -133,7 +133,7 @@ Keep a CHANGELOG once people follow versions. Early private work can rely on Git
 
 Use GitHub Packages only when the project publishes a library or an installable build.
 
-## 9. Documentation
+## 9. 📝 Documentation
 
 A public README should say what problem the project solves, what it does not do, how to use it, and which license applies. Add features, install steps, configuration, examples, tests, and a roadmap when they help. Explain a command before asking someone to run it.
 
@@ -143,7 +143,7 @@ Add `CONTRIBUTING` when other people send changes. It can point to this handbook
 
 A public repository should include a license file when the work is meant to be reused.
 
-## 10. Security
+## 10. 🔐 Security
 
 - Keep tokens, passwords, private keys, and private machine configuration out of commits and issues.
 - Leave `.env`, `secrets/`, and local credential files untracked.
@@ -157,7 +157,7 @@ A public repository should include a license file when the work is meant to be r
 
 Do not disclose unpatched vulnerabilities or exposed secrets in public issues. A dedicated private reporting channel has not been configured.
 
-## 11. Defaults
+## 11. 🧭 Defaults
 
 - Primary branch: `main`, including direct low-risk commits
 - Branches and pull requests for large or shared work
@@ -166,4 +166,4 @@ Do not disclose unpatched vulnerabilities or exposed secrets in public issues. A
 - Versions when they mean something
 - Descriptive issue titles, native issue types, few labels
 
-Start from a real problem. Prefer the safer default. Explain a command before running it, back up before changing something hard to undo, and test before you publish.
+Start from a real problem. Prefer the safer default. Explain a command before running it, back up before changing something hard to undo, and test before you publish. Document for your future self and improve through real feedback.

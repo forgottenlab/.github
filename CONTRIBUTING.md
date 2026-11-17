@@ -1,4 +1,4 @@
-# Contributing
+# 🤝 Contributing / 贡献指南
 
 [Engineering handbook](docs/standards/README.md) · [工程手册](docs/standards/README.zh-CN.md)
 
@@ -13,3 +13,7 @@ Use a descriptive issue title, without a `[Bug]` or `bug:` prefix. Choose the Bu
 不要提交密钥、令牌或本地配置。
 
 Do not commit secrets, tokens, or local configuration.
+
+使用英文或简体中文均可，无需提供双语重复内容。
+
+English or Simplified Chinese is welcome; no duplicate translation is required.

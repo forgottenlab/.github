@@ -2,11 +2,14 @@ name: 功能 / Feature
 description: 希望增加或改变的行为。A behavior you want added or changed.
 type: Feature
 body:
+  - type: markdown
+    attributes:
+      value: 请使用英文或简体中文填写，无需双语重复。Use English or Simplified Chinese; no duplicate translation is needed.
   - type: textarea
     id: need
     attributes:
       label: 要解决的问题 / Need
-      description: 现在缺什么，或哪里不顺手。用描述性标题，不必加前缀。
+      description: 说明当前的问题；标题直接描述需求，无需前缀。Describe the current gap; use a descriptive title without a prefix.
       placeholder: 当前的问题 / The current gap
     validations:
       required: true
@@ -14,6 +17,6 @@ body:
     id: idea
     attributes:
       label: 设想 / Idea
-      description: 如果已有做法，简要写上。可以留空。
+      description: 简述已有设想，可以留空。Briefly describe a possible approach; optional.
     validations:
       required: false
