@@ -1,0 +1,11 @@
+name: 任务 / Task
+description: 一件待办，不一定是缺陷或新功能。Work that is neither a bug nor a feature.
+type: Task
+body:
+  - type: textarea
+    id: work
+    attributes:
+      label: 要做的事 / Work
+      description: 完成后可以怎样判断。用描述性标题，不必加前缀。
+    validations:
+      required: true
