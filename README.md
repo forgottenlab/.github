@@ -28,4 +28,4 @@ This repository also provides lightweight GitHub Issue Forms and a Pull Request 
 
 ## 🤝 Contributions
 
-See the [contribution guidelines](CONTRIBUTING.md) for feedback and changes. Either English or Simplified Chinese is welcome; no bilingual submission is required.
+See the [contribution guidelines](CONTRIBUTING.md) for feedback and changes. External contributors can use English or Simplified Chinese. Translations are optional.

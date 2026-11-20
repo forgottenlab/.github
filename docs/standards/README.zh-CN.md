@@ -90,7 +90,7 @@ fix: handle a missing output directory
 docs: clarify when to tag a version
 ```
 
-标题可以写中文，类型名保持英文：
+类型前缀保持英文，提交说明和可选正文可使用中文或英文。
 
 ```text
 docs: 补充版本标签的使用时机
@@ -103,6 +103,8 @@ docs: 补充版本标签的使用时机
 ```text
 输出目录不存在时导出失败
 ```
+
+ForgottenLab 维护者默认用简体中文撰写 Issue 正文。中文 Issue 末尾以 `## English Summary` 为标题添加简短摘要，概括问题、需求、测试结果或核心结论。外部贡献者可使用英文或简体中文，英文摘要可选。全文翻译对所有人都是可选的。
 
 类别交给 GitHub Issue Types。可用时优先选择原生类型，例如 Bug、Task 和 Feature，并在 Issue 上选择可用的类型。标题里不加重复前缀，例如 `[Bug]`、`bug:`、`docs:`。
 
@@ -125,6 +127,8 @@ docs: 补充版本标签的使用时机
 - 有外部贡献
 
 Pull Request 是提议合并的变更。审查是其中一种用法，不是必经步骤。不设独立审查者。维护者可以合并自己的 Pull Request。说明里写清改了什么、如何检查过即可。
+
+维护者通常用简体中文撰写 Pull Request 说明。英文摘要可按读者需要添加。外部贡献者可使用英文或简体中文，英文摘要可选。全文翻译为可选，且不设强制语言校验。
 
 `.github/pull_request_template.md` 只预填这段说明，不构成审查门槛。
 

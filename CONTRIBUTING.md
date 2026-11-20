@@ -18,6 +18,10 @@ Attach bug evidence to the original Bug issue. Record task verification in the o
 
 Do not commit secrets, tokens, or local configuration.
 
-使用英文或简体中文均可，无需提供双语重复内容。
+ForgottenLab 维护者默认用简体中文撰写 Issue 正文。中文 Issue 末尾添加简短的 **English Summary**，概括问题、需求、测试结果或核心结论。PR 说明通常用简体中文，英文摘要可按读者需要添加。PR 不设强制语言校验。
 
-English or Simplified Chinese is welcome; no duplicate translation is required.
+ForgottenLab maintainers write issue bodies in Simplified Chinese by default. End Chinese issues with a brief **English Summary** of the problem, request, test results, or main conclusion. PR descriptions generally use Simplified Chinese, with a brief English summary when it helps readers. There are no mandatory language checks for PRs.
+
+外部贡献者可用英文或简体中文提交 Issue 和 PR，英文摘要可选。全文翻译对所有人都是可选的。
+
+External contributors can use English or Simplified Chinese for issues and PRs, with an optional English summary. Full translations are optional for everyone.

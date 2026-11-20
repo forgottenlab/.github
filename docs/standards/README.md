@@ -70,7 +70,7 @@ type: short description
 | `ci` | Automation setup |
 | `style` | Formatting only |
 
-`feat`, `fix`, and `docs` cover most commits. Add `build`, `ci`, or `style` only when they fit. A published version is a tag, not a `release:` commit. Keep the subject imperative and about one line. The subject may be Chinese; keep the type name in English. Add a body when the reason is not obvious. One commit should be one coherent change.
+`feat`, `fix`, and `docs` cover most commits. Add `build`, `ci`, or `style` only when they fit. A published version is a tag, not a `release:` commit. Keep the subject imperative and about one line. Keep the type prefix in English. Write the description and any body in Chinese or English. Add a body when the reason is not obvious. One commit should be one coherent change.
 
 ```text
 feat: add config export
@@ -85,6 +85,8 @@ Use a title that describes the problem or request:
 ```text
 Export fails when the output directory is missing
 ```
+
+ForgottenLab maintainers write issue bodies in Simplified Chinese by default. End Chinese issues with a brief `## English Summary` section covering the problem, request, test results, or main conclusion. External contributors can use English or Simplified Chinese, with an optional English summary. Full translations are optional for everyone.
 
 Record the category with GitHub Issue Types. Prefer native types where available, such as Bug, Task, and Feature. Choose an available type on the issue. Leave prefixes such as `[Bug]`, `bug:`, or `docs:` out of the title.
 
@@ -101,6 +103,8 @@ This repository includes short Bug, Feature, Task, and Test & Validation forms i
 A pull request is optional for ordinary solo work.
 
 Open one for a substantial change, a checkpoint before merging, or an external contribution. No independent reviewer is required. The author may merge their own pull request. Describe what changed and how it was checked.
+
+Maintainers generally write pull request descriptions in Simplified Chinese and can add a brief English summary when it helps readers. External contributors can use English or Simplified Chinese, with an optional English summary. Full translations are optional, and there are no mandatory language checks.
 
 `.github/pull_request_template.md` only prefills that description. It does not require a review.
 

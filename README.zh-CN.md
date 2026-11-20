@@ -28,4 +28,4 @@ ForgottenLab 的轻量 Git 与 GitHub 工程实践手册。
 
 ## 🤝 贡献
 
-反馈与修改请参阅[贡献指南](CONTRIBUTING.md)。使用英文或简体中文均可，无需重复提供两种语言。
+反馈与修改请参阅[贡献指南](CONTRIBUTING.md)。外部贡献者可使用英文或简体中文，翻译可选。

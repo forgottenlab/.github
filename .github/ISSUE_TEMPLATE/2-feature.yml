@@ -4,7 +4,12 @@ type: Feature
 body:
   - type: markdown
     attributes:
-      value: 请使用英文或简体中文填写，无需双语重复。Use English or Simplified Chinese; no duplicate translation is needed.
+      value: |
+        ForgottenLab 维护者默认用简体中文撰写正文。中文 Issue 末尾添加简短的 **English Summary**，概括要点即可。
+        外部贡献者可使用英文或简体中文，英文摘要可选。全文翻译均为可选。
+
+        ForgottenLab maintainers write issue bodies in Simplified Chinese by default. End Chinese issues with a brief **English Summary** of the main points.
+        External contributors can use English or Simplified Chinese. An English summary is optional for them. Full translations are optional for everyone.
   - type: textarea
     id: need
     attributes:
