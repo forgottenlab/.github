@@ -12,3 +12,22 @@ body:
       description: 说明要做什么及完成条件；标题无需前缀。Describe the work and how to tell it is done; no title prefix needed.
     validations:
       required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: 测试或验证结果 / Test or verification results
+      description: >-
+        简述执行了哪些检查、通过或失败情况和结论，可附相关 Commit、Issue 或 PR 链接。
+        Summarize what you checked, what passed or failed, and your conclusion. Link related commits, issues, or pull requests as useful.
+    validations:
+      required: false
+  - type: upload
+    id: evidence
+    attributes:
+      label: 测试报告与附件 / Test reports and attachments
+      description: >-
+        可附已脱敏的报告、日志、截图或实验数据。
+        Attach redacted reports, logs, screenshots, or experiment data if available.
+    validations:
+      required: false
+      accept: ".png,.jpg,.jpeg,.gif,.svg,.webp,.pdf,.log,.txt,.json,.csv,.zip,.docx,.xlsx"

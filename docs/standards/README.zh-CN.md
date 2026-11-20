@@ -108,7 +108,11 @@ docs: 补充版本标签的使用时机
 
 标签尽量少。类型和标题已经表达的信息，不必再贴一个同义标签。只有在需要额外筛选，例如区分文档和依赖升级时，再增加个别标签。本仓库的表单不添加标签。
 
-本仓库在 `.github/ISSUE_TEMPLATE/` 提供缺陷、功能和任务三份短表单。表单会设置 Issue Type，并把标题留空。空白 Issue 仍然可以开。某个仓库如果在自己的 `.github/ISSUE_TEMPLATE/` 中定义了有效模板或模板配置，GitHub 就使用本地配置，不再使用整个默认模板目录。
+本仓库在 `.github/ISSUE_TEMPLATE/` 提供缺陷、功能、任务和测试与验证四份短表单。表单会设置 Issue Type，并把标题留空。测试与验证使用 Task 类型。空白 Issue 仍然可以开。某个仓库如果在自己的 `.github/ISSUE_TEMPLATE/` 中定义了有效模板或模板配置，GitHub 就使用本地配置，不再使用整个默认模板目录。
+
+- 缺陷证据优先附在原缺陷 Issue。
+- 任务完成后的验证结果可记录在原 Task 或实现该任务的 PR 中。
+- 独立测试、兼容性实验或性能评估可以使用测试与验证表单。无需为每次测试单独开 Issue。
 
 ## 6. 🤝 Pull Request
 
@@ -131,6 +135,8 @@ Pull Request 是提议合并的变更。审查是其中一种用法，不是必�
 检查通过只说明这次运行里的命令成功了。打标签、创建 Release 和部署仍然分别决定。如果工作流会发布产物，从标签或手动运行启动它，而不是挂在每一次推送上。
 
 从一个有用的作业开始。出现真实需要后再增加作业。
+
+CI 原始日志和大体积构建产物优先放在 Actions Artifacts 或合适的报告位置。在 Issue 中简述结论并附证据链接。上传公开附件前，先移除密钥、令牌、隐私数据和未脱敏的内部配置。Issue 表单仅接受指定格式，单张图片上限为 10 MB，支持的文档、文本文件和压缩包每个上限为 25 MB。参见 [GitHub Issue 表单上传限制](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema#supported-file-types-and-size-limits)。
 
 ## 8. 📦 版本与发布
 

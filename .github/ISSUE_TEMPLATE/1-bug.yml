@@ -23,3 +23,13 @@ body:
         2.
     validations:
       required: false
+  - type: upload
+    id: evidence
+    attributes:
+      label: 测试证据 / Test evidence
+      description: >-
+        可附截图、日志或测试报告。请先移除密钥、令牌、隐私数据和未脱敏的内部配置。
+        Attach screenshots, logs, or test reports if available. Remove secrets, tokens, private data, and sensitive internal configuration before uploading.
+    validations:
+      required: false
+      accept: ".png,.jpg,.jpeg,.gif,.svg,.webp,.pdf,.log,.txt,.json,.csv,.zip,.docx,.xlsx"

@@ -90,7 +90,11 @@ Record the category with GitHub Issue Types. Prefer native types where available
 
 Keep labels few. Add a label only when the type and title do not already say it. The forms in this repository do not add labels.
 
-This repository includes short Bug, Feature, and Task forms in `.github/ISSUE_TEMPLATE/`. Each form sets the issue type and leaves the title empty. A blank issue stays available. If a repository defines valid issue templates or template configuration in its own `.github/ISSUE_TEMPLATE/`, GitHub uses that local configuration instead of the entire default template folder.
+This repository includes short Bug, Feature, Task, and Test & Validation forms in `.github/ISSUE_TEMPLATE/`. Each form sets the issue type and leaves the title empty. Test & Validation uses the Task issue type. A blank issue stays available. If a repository defines valid issue templates or template configuration in its own `.github/ISSUE_TEMPLATE/`, GitHub uses that local configuration instead of the entire default template folder.
+
+- Attach bug evidence to the original Bug issue.
+- Record task verification results in the original Task or in the PR that implements it.
+- Use Test & Validation for standalone tests, compatibility experiments, or performance evaluations. A separate issue is optional for each test.
 
 ## 6. 🤝 Pull requests
 
@@ -107,6 +111,8 @@ Add GitHub Actions when a repository benefits from a repeatable check. A small o
 A green check means those commands passed in that run. Tagging, publishing a Release, and deploying remain separate decisions. If a workflow publishes anything, start it from a tag or a manual run.
 
 Start with one useful job. Add more only for a real need.
+
+Keep raw CI logs and large build outputs in Actions artifacts or an appropriate report location. In the issue, summarize the outcome and link to the evidence. Remove secrets, tokens, private data, and sensitive internal configuration before uploading public attachments. Issue forms accept specific file formats and allow up to 10 MB per image and 25 MB per accepted document, text file, or archive. See [GitHub's issue form upload limits](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema#supported-file-types-and-size-limits).
 
 ## 8. 📦 Versions and releases
 

@@ -1,0 +1,68 @@
+name: 测试与验证 / Test & Validation
+description: >-
+  记录测试报告、回归验证、兼容性测试、性能评估及独立实验结果。
+  Record tests, verification results and supporting evidence.
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: 请使用英文或简体中文填写，无需双语重复。Use English or Simplified Chinese. One language is enough.
+  - type: dropdown
+    id: test-type
+    attributes:
+      label: 测试类型 / Test type
+      options:
+        - Functional
+        - Regression
+        - Compatibility
+        - Performance
+        - Integration
+        - Other
+  - type: input
+    id: target
+    attributes:
+      label: 测试对象 / Test target
+      description: 填写项目、组件、版本或 Commit SHA，以定位被测对象。Identify what you tested by project, component, version, or commit SHA.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 测试环境 / Test environment
+      description: 写明系统、软件版本和相关环境信息。List the operating system, software versions, and relevant environment details.
+  - type: textarea
+    id: method
+    attributes:
+      label: 测试方法 / Test method
+      description: 记录关键步骤、命令或数据来源。Record key steps, commands, or data sources.
+  - type: dropdown
+    id: result
+    attributes:
+      label: 测试结果 / Test result
+      options:
+        - Passed
+        - Failed
+        - Partial
+        - Inconclusive
+  - type: textarea
+    id: summary
+    attributes:
+      label: 结果摘要 / Result summary
+      description: 简述测试结论和关键发现。Summarize the conclusion and key findings.
+    validations:
+      required: true
+  - type: upload
+    id: evidence
+    attributes:
+      label: 测试证据 / Test evidence
+      description: >-
+        可附已脱敏的报告、日志、截图或实验数据。
+        Attach redacted reports, logs, screenshots, or experiment data if available.
+    validations:
+      required: false
+      accept: ".png,.jpg,.jpeg,.gif,.svg,.webp,.pdf,.log,.txt,.json,.csv,.zip,.docx,.xlsx"
+  - type: textarea
+    id: related-work
+    attributes:
+      label: 关联工作 / Related work
+      description: 可附相关 Issue、PR、Commit 或 Actions 运行链接。Link related issues, pull requests, commits, or Actions runs if available.
