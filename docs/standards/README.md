@@ -82,7 +82,7 @@ docs: clarify when to tag a version
 
 ## 5. 💬 Issues
 
-Choose the project's maintenance communication language in this order. It guides the issue body and remains the default for maintainer pull request titles and bodies.
+Choose the project's maintenance communication language in this order. It guides the issue body.
 
 1. Follow the language explicitly declared by the project. Project-specific conventions take precedence over the central defaults.
 2. If there is no declaration, maintainers can use the project's main user documentation and contribution guide to make a judgment. An English README, bilingual READMEs, or the programming language alone cannot determine the maintenance language.
@@ -174,7 +174,9 @@ A pull request is optional for ordinary solo work.
 
 Open one for a substantial change, a checkpoint before merging, or an external contribution. No independent reviewer is required. The author may merge their own pull request. Describe what changed and how it was checked.
 
-Maintainers default to the project's maintenance communication language for both the pull request title and body. Use Simplified Chinese in projects maintained in Simplified Chinese and add an English summary when it helps readers. Use English in projects maintained in English. Accept pull requests from external contributors in English or Simplified Chinese. Full translations are optional, and there are no mandatory language checks.
+In ForgottenLab's own public technical projects, maintainers should prefer a concise, accurate English PR title that describes the change that would be merged. Prefer a Conventional Commits prefix that fits the actual work, such as `feat: add read-only setup planning`, `fix: prevent concurrent installer launches`, or `docs: clarify installation requirements`. PR prefixes are recommended, and project-specific rules can take precedence. Use the Issue title to describe the problem and the native Issue Type to classify it.
+
+The PR title and body can use different languages. Maintainers usually write technical details in Simplified Chinese and can also write in English. End a primarily Chinese body with a brief `## English Summary` covering the main changes, verification results, or relevant limits. An English body can stand on its own. External contributors can use either English or Simplified Chinese, and their English summary is optional. Accept both languages without mandatory language checks or full translations.
 
 `.github/pull_request_template.md` prefills the description. A repository can provide its own pull request template to override this default.
 
@@ -184,9 +186,19 @@ Use the PR description as the durable review record. Include what changed, why, 
 
 For a PR that represents one logical change, prefer Squash and merge where available. Keep intermediate commits during development as needed. Choose another allowed merge method when the individual commits need to remain in the default branch history.
 
-With GitHub's **Default message**, a one-commit PR starts with that commit's title and message. A PR with multiple commits starts with the PR title and a list of commits. Reuse an accurate single-commit message. For a multi-commit PR, check the proposed subject before merging and edit it when needed to follow the commit conventions, even when the PR title follows a different project language. The default format does not extract custom Markdown sections from the PR description. A separate `Squash Summary` section and copying the whole PR description are unnecessary. See [GitHub's squash message options](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests).
+With GitHub's **Default message**, a one-commit PR starts with that commit's title and message. A PR with multiple commits starts with the PR title and a list of commits. Reuse an accurate single-commit message. A Conventional Commits-style PR title can save editing for a multi-commit squash. Check the proposed subject and revise it when needed to follow the commit conventions. The default format does not extract custom Markdown sections from the PR description. A separate `Squash Summary` section and copying the whole PR description are unnecessary. See [GitHub's squash message options](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests).
 
 Before merging, confirm the actual diff, necessary checks, merge readiness, final commit message, and author and co-author attribution. Preserve technical details and verified attribution that need to survive the squash.
+
+### Contributing to other projects
+
+When opening an issue or PR in a repository maintained by someone else, use this order.
+
+1. Follow the target project's explicit contribution guide, issue or PR template, maintainer instructions, repository development rules, and applicable official guidance.
+2. If the project is silent, look at several representative recent open and merged PRs. Compare titles, bodies, commit subjects, merge practices, language, and maintainer feedback before treating a pattern as an established convention.
+3. If there is no clear pattern, use a clear English title and a body the target community can understand. Describe the work and its verification accurately.
+
+The target project decides whether to use a title prefix, English summary, template, or squash merge. If its guidance conflicts or is unclear, flag the uncertainty and leave upstream rules to its maintainers.
 
 ## 7. 🧪 Checks and automation
 

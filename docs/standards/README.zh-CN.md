@@ -94,7 +94,7 @@ docs: clarify when to tag a version
 
 ## 5. 💬 Issue
 
-按以下顺序确定项目维护交流语言。它为 Issue 正文提供参考，并继续作为维护者 PR 标题和正文的默认语言。
+按以下顺序确定项目维护交流语言。它为 Issue 正文提供参考。
 
 1. 遵循项目明确声明的语言。项目级明确约定优先于中央默认建议。
 2. 项目未声明时，由维护者参考主要用户文档和贡献指南判断。英文 README、双语 README 或编程语言本身均不足以确定维护语言。
@@ -192,7 +192,9 @@ gh issue view $issue --repo $repo --json url,title,body,state,issueType,labels
 
 Pull Request 是提议合并的变更。审查是其中一种用法，不是必经步骤。不设独立审查者。维护者可以合并自己的 Pull Request。说明里写清改了什么、如何检查过即可。
 
-维护者的 Pull Request 标题和正文默认采用项目维护交流语言。中文维护项目优先用简体中文，英文摘要可按读者需要添加。英文维护项目优先用英文。接受外部贡献者用英文或简体中文提交 Pull Request。全文翻译可选，不设强制语言校验。
+ForgottenLab 自有公开技术项目的维护者优先用简洁、准确的英文 PR 标题，描述拟合并的变更。建议按实际改动选择 Conventional Commits 风格的前缀，例如 `feat: add read-only setup planning`、`fix: prevent concurrent installer launches` 或 `docs: clarify installation requirements`。PR 前缀是建议，项目级明确约定可优先。Issue 标题继续描述问题，由原生 Issue Type 分类。
+
+PR 标题和正文可用不同语言。维护者通常用简体中文写技术正文，也可用英文。中文为主体的正文末尾附简短的 `## English Summary`，概括主要变更、验证结果或必要限制。英文正文可直接提交。外部贡献者可用英文或简体中文，英文摘要可选。两种语言都接受，全文翻译可选，不设强制语言校验。
 
 `.github/pull_request_template.md` 预填 PR 说明。项目可提供自己的 Pull Request 模板以覆盖默认模板。
 
@@ -202,9 +204,19 @@ Pull Request 是提议合并的变更。审查是其中一种用法，不是必�
 
 一个 PR 只包含一个逻辑变更时，可用的合并方式中优先考虑 Squash and merge。开发中按需保留中间提交。独立提交需要长期保留在默认分支时，可选择仓库允许的其他合并方式。
 
-使用 GitHub 的 **Default message** 时，单提交 PR 以原提交的标题和正文作为初始内容，多提交 PR 则以 PR 标题和提交列表作为初始内容。准确的单提交信息可直接复用。多提交 PR 合并前要检查预填标题，必要时按提交约定调整，即使 PR 标题采用了不同的项目语言。默认格式不会提取 PR 正文中的自定义 Markdown 小节。无需另填 `Squash Summary`，也无需复制整份 PR 正文。参见 [GitHub 的 Squash 消息选项](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)。
+使用 GitHub 的 **Default message** 时，单提交 PR 以原提交的标题和正文作为初始内容，多提交 PR 则以 PR 标题和提交列表作为初始内容。准确的单提交信息可直接复用。Conventional Commits 风格的 PR 标题可减少多提交 Squash 的重复填写。合并前仍需检查预填标题，必要时按提交约定调整。默认格式不会提取 PR 正文中的自定义 Markdown 小节。无需另填 `Squash Summary`，也无需复制整份 PR 正文。参见 [GitHub 的 Squash 消息选项](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)。
 
 合并前核对实际差异、必要验证结果、合并就绪状态、最终提交信息以及作者和共同作者归属。Squash 后应保留必要的技术细节和已核实的贡献归属。
+
+### 向外部项目贡献
+
+向其他人维护的仓库提交 Issue 或 PR 时，按以下顺序参考目标项目的规则。
+
+1. 遵循目标项目明确的贡献指南、Issue 或 PR 模板、维护者要求、仓库开发规则和相关官方说明。
+2. 若没有明确要求，查看近期多个有代表性的开放与已合并 PR。结合标题、正文、提交标题、合并方式、语言和维护者反馈判断是否形成稳定惯例。
+3. 如果仍无明确惯例，使用清晰的英文标题和目标社区易于理解的正文，准确说明实际工作与验证情况。
+
+由目标项目决定是否采用标题前缀、英文摘要、模板或 Squash 合并。遇到要求冲突或不明确时，说明不确定之处，由上游维护者决定其规范。
 
 ## 7. 🧪 检查与自动化
 

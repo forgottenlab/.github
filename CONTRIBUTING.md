@@ -22,9 +22,13 @@ Attach bug evidence to the original Bug issue. Record task verification in the o
 
 Do not commit secrets, tokens, or local configuration.
 
-Issue 标题与正文可以使用不同语言。公开技术项目的维护者优先使用英文标题，项目可明确自己的约定。维护者的中文 Issue 正文末尾附简短的 **English Summary**。维护者的 PR 标题与正文采用项目维护交流语言，中文 PR 的英文摘要按需添加。
+Issue 标题与正文可以使用不同语言。公开技术项目的维护者优先使用英文标题，项目可明确自己的约定。维护者的中文 Issue 正文末尾附简短的 **English Summary**。
 
-An issue title and body can use different languages. Maintainers of public technical projects should prefer English titles, subject to the project's own policy. End a maintainer-written Chinese issue body with a brief **English Summary**. Maintainers use the project's maintenance language for PR titles and bodies, with an English summary for Chinese PRs when it helps readers.
+An issue title and body can use different languages. Maintainers of public technical projects should prefer English titles, subject to the project's own policy. End a maintainer-written Chinese issue body with a brief **English Summary**.
+
+维护者优先使用简洁的英文 PR 标题，建议按实际变更使用 Conventional Commits 前缀。PR 正文可用中文或英文，维护者以中文为主的正文在末尾附简短的 **English Summary**。向其他项目贡献时，遵循目标项目的要求和惯例。
+
+Maintainers should prefer concise English PR titles with a Conventional Commits prefix that fits the change. PR bodies can be in Chinese or English. End a primarily Chinese maintainer body with a brief **English Summary**. Follow the target project's requirements and conventions when contributing elsewhere.
 
 外部贡献者可用英文或简体中文提交 Issue 和 PR，英文摘要可选。全文翻译对所有人都是可选的。
 
