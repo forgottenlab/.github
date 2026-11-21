@@ -10,6 +10,10 @@ Issue 使用描述性标题，不加 `[Bug]`、`bug:` 这类前缀。按需选�
 
 Use a descriptive issue title, without a `[Bug]` or `bug:` prefix. Choose the Bug, Feature, Task, or Test & Validation form when it fits. Keep labels few.
 
+提交 Issue 或 PR 前，按问题范围查找已有讨论。若同一问题已有人跟踪，优先补充有新信息的证据。
+
+Before opening an issue or PR, look for relevant existing threads. If the same problem is already tracked, add evidence that brings new information.
+
 缺陷证据优先附在原缺陷 Issue。任务的验证结果可以写在原 Task 或 PR；独立测试可用测试与验证表单。公开上传附件前请先脱敏。
 
 Attach bug evidence to the original Bug issue. Record task verification in the original Task or PR. Use Test & Validation for standalone tests. Remove sensitive information from public attachments before uploading.

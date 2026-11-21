@@ -96,6 +96,8 @@ Use a title that describes the problem or request:
 Export fails when the output directory is missing
 ```
 
+Before opening a public issue or pull request, search the relevant open and closed issues, pull requests, enabled Discussions, and the upstream project's official feedback channels. Follow the target project's contribution guide and templates. When the same problem is already tracked, add evidence that changes what is known, such as another affected environment or version, logs, test results, a narrower cause, a boundary case, or a verified fix. Open a separate issue for a materially different problem, a regression after a fix, or when upstream guidance calls for a new thread.
+
 - In projects maintained in Simplified Chinese, write the title and body in Simplified Chinese by default. End the issue with a brief `## English Summary` of the problem, request, test results, or main conclusion.
 - In projects maintained in English, write the title and body in English by default. A Chinese translation is optional.
 - Accept issues from external contributors in English or Simplified Chinese, regardless of the project default. An English summary is optional for them. Full translations are optional for everyone, and there are no mandatory language checks.
@@ -119,6 +121,16 @@ Open one for a substantial change, a checkpoint before merging, or an external c
 Maintainers default to the project's maintenance communication language for both the pull request title and body. Use Simplified Chinese in projects maintained in Simplified Chinese and add an English summary when it helps readers. Use English in projects maintained in English. Accept pull requests from external contributors in English or Simplified Chinese. Full translations are optional, and there are no mandatory language checks.
 
 `.github/pull_request_template.md` prefills the description. A repository can provide its own pull request template to override this default.
+
+### Pull request descriptions and squash merges
+
+Use the PR description as the durable review record. Include what changed, why, and how it was verified. Add compatibility, safety boundaries, known limitations, and related issues when relevant. Keep the final commit subject concise and traceable, following the [commit conventions](#4--commits). Include a commit body when important technical context needs to stay in Git history.
+
+For a PR that represents one logical change, prefer Squash and merge where available. Keep intermediate commits during development as needed. Choose another allowed merge method when the individual commits need to remain in the default branch history.
+
+With GitHub's **Default message**, a one-commit PR starts with that commit's title and message. A PR with multiple commits starts with the PR title and a list of commits. Reuse an accurate single-commit message. For a multi-commit PR, check the proposed subject before merging and edit it when needed to follow the commit conventions, even when the PR title follows a different project language. The default format does not extract custom Markdown sections from the PR description. A separate `Squash Summary` section and copying the whole PR description are unnecessary. See [GitHub's squash message options](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests).
+
+Before merging, confirm the actual diff, necessary checks, merge readiness, final commit message, and author and co-author attribution. Preserve technical details and verified attribution that need to survive the squash.
 
 ## 7. 🧪 Checks and automation
 
@@ -189,3 +201,9 @@ Do not disclose unpatched vulnerabilities or exposed secrets in public issues. A
 - Descriptive issue titles, native issue types, few labels
 
 Start from a real problem. Prefer the safer default. Explain a command before running it, back up before changing something hard to undo, and test before you publish. Document for your future self and improve through real feedback.
+
+### Reuse-first development
+
+Before starting a substantial feature or a standalone project, check what the current project, other ForgottenLab repositories, and the relevant open-source ecosystem already provide. Use official documentation and upstream components to verify fit and licensing. Start with what can be used directly. Consider extending or fixing an existing project, contributing upstream, or combining projects or reusing a module before starting a new repository.
+
+A new project can have independent value as a learning experiment or because it needs a different architecture, safety boundary, compatibility target, or clear innovation. Keep the research proportional to the decision. A routine fix needs only a focused check.
