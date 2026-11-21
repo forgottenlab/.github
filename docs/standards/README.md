@@ -70,15 +70,25 @@ type: short description
 | `ci` | Automation setup |
 | `style` | Formatting only |
 
-`feat`, `fix`, and `docs` cover most commits. Add `build`, `ci`, or `style` only when they fit. A published version is a tag, not a `release:` commit. Keep the subject imperative and about one line. Keep the type prefix in English. Write the description and any body in Chinese or English. Add a body when the reason is not obvious. One commit should be one coherent change.
+`feat`, `fix`, and `docs` cover most commits. Add `build`, `ci`, or `style` only when they fit. A published version is a tag, not a `release:` commit. Keep the subject imperative and about one line. Use an English type prefix. Maintainers should prefer a concise, precise English description in the subject. Use Chinese or English in the body for technical context, verification, compatibility, or rollback details when useful. One commit should be one coherent change.
+
+The English subject preference is guidance. Existing Chinese commit subjects remain valid, and no commit language checks are required.
 
 ```text
 feat: add config export
-fix: handle a missing output directory
+fix: prevent concurrent installer launches
 docs: clarify when to tag a version
 ```
 
 ## 5. 💬 Issues
+
+Choose the project's maintenance communication language for maintainer issues and pull requests in this order.
+
+1. Follow the language explicitly declared by the project. Project-specific conventions take precedence over the central defaults.
+2. If there is no declaration, maintainers can use the project's main user documentation and contribution guide to make a judgment. An English README, bilingual READMEs, or the programming language alone cannot determine the maintenance language.
+3. If the language is still unclear, use ForgottenLab's default of Simplified Chinese.
+
+Maintainers apply this guidance when writing. GitHub does not automatically detect or switch the language for a project.
 
 Use a title that describes the problem or request:
 
@@ -86,13 +96,15 @@ Use a title that describes the problem or request:
 Export fails when the output directory is missing
 ```
 
-ForgottenLab maintainers write issue bodies in Simplified Chinese by default. End Chinese issues with a brief `## English Summary` section covering the problem, request, test results, or main conclusion. External contributors can use English or Simplified Chinese, with an optional English summary. Full translations are optional for everyone.
+- In projects maintained in Simplified Chinese, write the title and body in Simplified Chinese by default. End the issue with a brief `## English Summary` of the problem, request, test results, or main conclusion.
+- In projects maintained in English, write the title and body in English by default. A Chinese translation is optional.
+- Accept issues from external contributors in English or Simplified Chinese, regardless of the project default. An English summary is optional for them. Full translations are optional for everyone, and there are no mandatory language checks.
 
 Record the category with GitHub Issue Types. Prefer native types where available, such as Bug, Task, and Feature. Choose an available type on the issue. Leave prefixes such as `[Bug]`, `bug:`, or `docs:` out of the title.
 
-Keep labels few. Add a label only when the type and title do not already say it. The forms in this repository do not add labels.
+Use labels only for extra classification beyond the type and title. Avoid labels that duplicate native Issue Types. Prefer short, stable English names that are easy to understand across projects when adding or maintaining labels. Each project can keep its own label set, with exceptions for upstream compatibility or special workflows. Existing labels, including Chinese labels, can stay as they are. The central repository does not synchronize labels, and its issue forms do not assign them.
 
-This repository includes short Bug, Feature, Task, and Test & Validation forms in `.github/ISSUE_TEMPLATE/`. Each form sets the issue type and leaves the title empty. Test & Validation uses the Task issue type. A blank issue stays available. If a repository defines valid issue templates or template configuration in its own `.github/ISSUE_TEMPLATE/`, GitHub uses that local configuration instead of the entire default template folder.
+This repository includes short Bug, Feature, Task, and Test & Validation forms in `.github/ISSUE_TEMPLATE/`. Each form sets the issue type and leaves the title empty. Test & Validation uses the Task issue type. A blank issue stays available. Projects can specify their own conventions in dedicated templates. If a repository defines valid issue templates or template configuration in its own `.github/ISSUE_TEMPLATE/`, GitHub uses that local configuration instead of the entire default template folder.
 
 - Attach bug evidence to the original Bug issue.
 - Record task verification results in the original Task or in the PR that implements it.
@@ -104,9 +116,9 @@ A pull request is optional for ordinary solo work.
 
 Open one for a substantial change, a checkpoint before merging, or an external contribution. No independent reviewer is required. The author may merge their own pull request. Describe what changed and how it was checked.
 
-Maintainers generally write pull request descriptions in Simplified Chinese and can add a brief English summary when it helps readers. External contributors can use English or Simplified Chinese, with an optional English summary. Full translations are optional, and there are no mandatory language checks.
+Maintainers default to the project's maintenance communication language for both the pull request title and body. Use Simplified Chinese in projects maintained in Simplified Chinese and add an English summary when it helps readers. Use English in projects maintained in English. Accept pull requests from external contributors in English or Simplified Chinese. Full translations are optional, and there are no mandatory language checks.
 
-`.github/pull_request_template.md` only prefills that description. It does not require a review.
+`.github/pull_request_template.md` prefills the description. A repository can provide its own pull request template to override this default.
 
 ## 7. 🧪 Checks and automation
 

@@ -7,11 +7,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        ForgottenLab 维护者默认用简体中文撰写正文。中文 Issue 末尾添加简短的 **English Summary**，概括要点即可。
-        外部贡献者可使用英文或简体中文，英文摘要可选。全文翻译均为可选。
+        维护者的标题和正文采用项目维护交流语言。优先遵循项目声明，其次参考维护者结合项目文档作出的判断。仍无法确定时用简体中文。
+        维护者撰写中文 Issue 时，在正文末尾附简短的 **English Summary**。外部贡献者可用英文或简体中文，英文摘要可选。
 
-        ForgottenLab maintainers write issue bodies in Simplified Chinese by default. End Chinese issues with a brief **English Summary** of the main points.
-        External contributors can use English or Simplified Chinese. An English summary is optional for them. Full translations are optional for everyone.
+        Maintainers use the project's maintenance language for the title and body. Follow the project's declaration first, then the maintainer's judgment based on project docs. If neither determines a language, use Simplified Chinese.
+        End maintainer-written Chinese issues with a brief **English Summary**. External contributors can use English or Simplified Chinese, with an optional English summary.
   - type: dropdown
     id: test-type
     attributes:
