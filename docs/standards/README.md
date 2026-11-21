@@ -82,7 +82,7 @@ docs: clarify when to tag a version
 
 ## 5. 💬 Issues
 
-Choose the project's maintenance communication language for maintainer issues and pull requests in this order.
+Choose the project's maintenance communication language in this order. It guides the issue body and remains the default for maintainer pull request titles and bodies.
 
 1. Follow the language explicitly declared by the project. Project-specific conventions take precedence over the central defaults.
 2. If there is no declaration, maintainers can use the project's main user documentation and contribution guide to make a judgment. An English README, bilingual READMEs, or the programming language alone cannot determine the maintenance language.
@@ -90,19 +90,15 @@ Choose the project's maintenance communication language for maintainer issues an
 
 Maintainers apply this guidance when writing. GitHub does not automatically detect or switch the language for a project.
 
-Use a title that describes the problem or request:
+For maintainer issues in public technical projects, prefer a concise, descriptive English title. Follow any explicit project or upstream title policy. For example, a project primarily serving Chinese-speaking users can use Chinese titles. Describe the problem or request directly and omit category prefixes such as `bug:`, `enhancement:`, `feature:`, `docs:`, or `[Bug]`.
 
-```text
-Export fails when the output directory is missing
-```
+The title and body can use different languages. Maintainers can write the issue body in Simplified Chinese or English, using the project's maintenance language as a guide. End a Chinese body with a brief `## English Summary` of the problem, request, test results, or main conclusion. Full translations are optional.
+
+Accept external contributions in English or Simplified Chinese, including titles in either language. An English summary is optional for external contributors. Apply this guidance to new writing and retain existing issues in their original language. The preference adds no language checks.
 
 Before opening a public issue or pull request, search the relevant open and closed issues, pull requests, enabled Discussions, and the upstream project's official feedback channels. Follow the target project's contribution guide and templates. When the same problem is already tracked, add evidence that changes what is known, such as another affected environment or version, logs, test results, a narrower cause, a boundary case, or a verified fix. Open a separate issue for a materially different problem, a regression after a fix, or when upstream guidance calls for a new thread.
 
-- In projects maintained in Simplified Chinese, write the title and body in Simplified Chinese by default. End the issue with a brief `## English Summary` of the problem, request, test results, or main conclusion.
-- In projects maintained in English, write the title and body in English by default. A Chinese translation is optional.
-- Accept issues from external contributors in English or Simplified Chinese, regardless of the project default. An English summary is optional for them. Full translations are optional for everyone, and there are no mandatory language checks.
-
-Record the category with GitHub Issue Types. Prefer native types where available, such as Bug, Task, and Feature. Choose an available type on the issue. Leave prefixes such as `[Bug]`, `bug:`, or `docs:` out of the title.
+Record the category with GitHub Issue Types. Prefer available native types such as Bug, Task, and Feature.
 
 Use labels only for extra classification beyond the type and title. Avoid labels that duplicate native Issue Types. Prefer short, stable English names that are easy to understand across projects when adding or maintaining labels. Each project can keep its own label set, with exceptions for upstream compatibility or special workflows. Existing labels, including Chinese labels, can stay as they are. The central repository does not synchronize labels, and its issue forms do not assign them.
 
@@ -111,6 +107,66 @@ This repository includes short Bug, Feature, Task, and Test & Validation forms i
 - Attach bug evidence to the original Bug issue.
 - Record task verification results in the original Task or in the PR that implements it.
 - Use Test & Validation for standalone tests, compatibility experiments, or performance evaluations. A separate issue is optional for each test.
+
+### Issue lifecycle
+
+- **Completed** applies when the issue is resolved or the work is finished and the necessary verification is complete. Link a fix commit, PR, or test record, or summarize what was done when useful. Report unverified results as such.
+- **Duplicate** applies when the issues are materially the same. Explain the relationship and reference the original issue. Use GitHub's native duplicate closure where available. A similar title alone is insufficient. [GitHub CLI duplicate closure](https://cli.github.com/manual/gh_issue_close)
+- **Not planned** records a decision to defer or decline work. Briefly explain the reason and keep it distinct from a resolution.
+- **Reopen or report a regression** after checking the root cause, affected version, and earlier discussion. Decide whether to reopen the existing issue or file a new one, and cross-reference related work.
+- **Open or inconclusive** is appropriate when the evidence does not establish a resolution. Leave it open as needed. Inactivity alone is insufficient grounds to close it.
+
+Use GitHub's native state, close reasons, and issue references. Add a PR link when relevant. A custom status, lifecycle label, or automatic closure rule is unnecessary.
+
+### Filing issues with GitHub CLI
+
+The GitHub web interface renders YAML Issue Forms with fields, validation, and upload controls. With `gh`, prepare Markdown and pass it with `--body-file`. The `--template` flag supplies starting body text. To fill and validate YAML form fields, use the web form. [GitHub CLI issue reference](https://cli.github.com/manual/gh_issue)
+
+Replace `OWNER/REPO` with the intended repository. Use the title and body conventions above, including a short English summary for a maintainer's Chinese body. Prefer the repository's native Issue Type and omit unnecessary labels. Search first, then review the actual repository, title, and complete text before any public write. For existing issues, verify the issue number and current contents. A search or preview grants no write authorization.
+
+```powershell
+$repo = 'OWNER/REPO'
+$title = 'Export fails when the output directory is missing'
+gh issue list --repo $repo --state all --search 'export "output directory"'
+Get-Content -LiteralPath .\issue.md -Raw -Encoding utf8
+```
+
+For example, `issue.md` could be a short Chinese body with an English summary.
+
+```markdown
+导出目录不存在时，导出会失败。预期自动创建目录并完成导出。
+
+## English Summary
+Export fails when the output directory is missing. It should create the directory and complete the export.
+```
+
+Once authorized to create the issue, run the create command. Use `--type Bug` only when that native type is available and appropriate.
+
+```powershell
+gh issue create --repo $repo --title $title --body-file .\issue.md --type Bug
+```
+
+To add evidence to an existing issue, preview `evidence.md` first and use the actual issue number. The following command posts a new comment.
+
+```powershell
+# Replace 123 with the issue number to update.
+$issue = 123
+gh issue comment $issue --repo $repo --body-file .\evidence.md
+```
+
+To edit an existing issue, set the revised title or use `--body-file` with the complete reviewed body. Use only the option you intend to change.
+
+```powershell
+gh issue edit $issue --repo $repo --title $title
+# Body-only edit, using the complete reviewed replacement body
+# gh issue edit $issue --repo $repo --body-file .\issue.md
+```
+
+Check the result with `gh issue view`. After creation, set `$issue` to the number shown in the new issue URL.
+
+```powershell
+gh issue view $issue --repo $repo --json url,title,body,state,issueType,labels
+```
 
 ## 6. 🤝 Pull requests
 

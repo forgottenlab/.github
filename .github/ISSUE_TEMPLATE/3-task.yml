@@ -5,11 +5,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        维护者的标题和正文采用项目维护交流语言。优先遵循项目声明，其次参考维护者结合项目文档作出的判断。仍无法确定时用简体中文。
-        维护者撰写中文 Issue 时，在正文末尾附简短的 **English Summary**。外部贡献者可用英文或简体中文，英文摘要可选。
+        公开技术项目的维护者优先用简洁、描述性的英文标题。有明确的项目标题语言约定时，以项目约定为准。
+        正文可用简体中文或英文。维护者用中文写正文时，在末尾附简短的 **English Summary**。
+        外部贡献者的标题与正文可用英文或简体中文，英文摘要可选。这里的语言建议不作强制校验。
 
-        Maintainers use the project's maintenance language for the title and body. Follow the project's declaration first, then the maintainer's judgment based on project docs. If neither determines a language, use Simplified Chinese.
-        End maintainer-written Chinese issues with a brief **English Summary**. External contributors can use English or Simplified Chinese, with an optional English summary.
+        Maintainers of public technical projects should prefer a concise, descriptive English title. Follow any explicit project policy for title language.
+        Use English or Simplified Chinese for the body. End a maintainer-written Chinese body with a brief **English Summary**.
+        External contributors can use English or Simplified Chinese for titles and bodies, with an optional English summary. This guidance adds no language checks.
   - type: textarea
     id: work
     attributes:

@@ -94,7 +94,7 @@ docs: clarify when to tag a version
 
 ## 5. 💬 Issue
 
-维护者撰写 Issue 和 Pull Request 时，按以下顺序确定项目维护交流语言。
+按以下顺序确定项目维护交流语言。它为 Issue 正文提供参考，并继续作为维护者 PR 标题和正文的默认语言。
 
 1. 遵循项目明确声明的语言。项目级明确约定优先于中央默认建议。
 2. 项目未声明时，由维护者参考主要用户文档和贡献指南判断。英文 README、双语 README 或编程语言本身均不足以确定维护语言。
@@ -102,19 +102,15 @@ docs: clarify when to tag a version
 
 这项约定由维护者在撰写时应用。GitHub 不会自动识别或切换项目语言。
 
-标题直接描述问题或请求：
+公开技术项目中，维护者优先使用简洁、描述性的英文 Issue 标题。项目或上游明确声明标题语言时，遵循其约定。例如，主要面向中文用户的项目可用中文标题。标题直接描述问题或需求，省去 `bug:`、`enhancement:`、`feature:`、`docs:` 或 `[Bug]` 等分类前缀。
 
-```text
-输出目录不存在时导出失败
-```
+标题和正文可以使用不同语言。维护者可以参考项目维护交流语言，用简体中文或英文写正文。中文正文末尾附简短的 `## English Summary`，概括问题、需求、测试结果或核心结论。全文翻译可选。
+
+接受外部贡献者用英文或简体中文提交，包括用任一语言撰写标题。外部贡献者的英文摘要可选。语言建议适用于新撰写的内容，既有 Issue 保留原有语言，不设置强制语言校验。
 
 对外创建公开 Issue 或 Pull Request 前，按问题范围检索开放和已关闭的 Issues、Pull Requests、已启用的 Discussions，以及上游官方反馈渠道。遵循目标项目的贡献指南和模板。同一问题已有人跟踪时，优先补充有新增价值的证据，例如不同的环境或版本、日志、测试结果、更具体的原因、边界条件或已验证的修复。问题有实质差异、已修复问题再次出现，或上游指引要求另开讨论时，可以新建 Issue。
 
-- 以简体中文为维护交流语言的项目，标题和正文默认用简体中文。在正文末尾以 `## English Summary` 为标题添加简短摘要，概括问题、需求、测试结果或核心结论。
-- 以英文为维护交流语言的项目，标题和正文默认用英文。中文翻译可选。
-- 接受外部贡献者用英文或简体中文提交 Issue，即使所用语言与项目默认语言不同。外部贡献者的英文摘要可选。全文翻译对所有人都是可选的，不设强制语言校验。
-
-类别交给 GitHub Issue Types。可用时优先选择原生类型，例如 Bug、Task 和 Feature，并在 Issue 上选择可用的类型。标题里不加重复前缀，例如 `[Bug]`、`bug:`、`docs:`。
+类别交给 GitHub Issue Types，优先选择可用的原生类型，例如 Bug、Task 和 Feature。
 
 仅在类型和标题之外确有额外分类需要时使用 GitHub Labels。避免为原生 Issue Type 添加同义标签。新增或维护标签时，优先使用简洁、稳定、便于跨项目理解的英文名称。各项目可保留自己的标签集合，并为上游兼容或特殊工作流保留例外。既有标签可以保持原样，包括中文标签。中央仓库不会同步标签，中央 Issue 表单也不会添加标签。
 
@@ -123,6 +119,66 @@ docs: clarify when to tag a version
 - 缺陷证据优先附在原缺陷 Issue。
 - 任务完成后的验证结果可记录在原 Task 或实现该任务的 PR 中。
 - 独立测试、兼容性实验或性能评估可以使用测试与验证表单。无需为每次测试单独开 Issue。
+
+### Issue 生命周期
+
+- **Completed** 用于问题已解决或工作已完成，且所需验证已完成的情况。按需关联修复 Commit、PR 或测试记录，也可简述完成情况。尚未验证的结果应如实说明。
+- **Duplicate** 用于确认实质相同的问题。说明重复关系并引用原 Issue，有原生重复关闭选项时使用该选项。仅标题相似不足以判定重复。[GitHub CLI 重复关闭说明](https://cli.github.com/manual/gh_issue_close)
+- **Not planned** 用于记录暂缓或不实施的决定。简述原因，并与已解决区分开。
+- **重新打开或报告回归** 前，核对根因、受影响版本和此前讨论。按实际情况重新打开原 Issue 或另开一项，并交叉引用相关工作。
+- **Open 或结论未定** 适用于证据尚不足以确认解决的情况。按需保持开放。长时间无活动本身不足以关闭 Issue。
+
+使用 GitHub 原生状态、关闭原因和 Issue 引用。相关时可附 PR 链接。无需新增自定义状态、生命周期标签或自动关闭规则。
+
+### 使用 GitHub CLI 提交 Issue
+
+GitHub 网页会将 YAML Issue Forms 渲染成带字段、验证及上传控件的表单。使用 `gh` 时，先准备 Markdown，再通过 `--body-file` 提交。`--template` 提供正文初稿。填写和验证 YAML 表单字段应使用网页表单。[GitHub CLI Issue 参考](https://cli.github.com/manual/gh_issue)
+
+将 `OWNER/REPO` 换成目标仓库。沿用上文的标题和正文约定，维护者使用中文正文时附简短英文摘要。优先使用仓库原生 Issue Type，省去无必要的标签。先查重，公开写入前核对实际仓库、标题和完整内容。操作已有 Issue 时，还要核对编号和现有内容。查询和预览不构成写入授权。
+
+```powershell
+$repo = 'OWNER/REPO'
+$title = 'Export fails when the output directory is missing'
+gh issue list --repo $repo --state all --search 'export "output directory"'
+Get-Content -LiteralPath .\issue.md -Raw -Encoding utf8
+```
+
+例如，`issue.md` 可以是一段简短的中文正文，末尾附英文摘要。
+
+```markdown
+导出目录不存在时，导出会失败。预期自动创建目录并完成导出。
+
+## English Summary
+Export fails when the output directory is missing. It should create the directory and complete the export.
+```
+
+获得创建授权后执行创建命令。仅在 `Bug` 这一原生类型可用且适合时传入 `--type Bug`。
+
+```powershell
+gh issue create --repo $repo --title $title --body-file .\issue.md --type Bug
+```
+
+给已有 Issue 补充证据时，先预览 `evidence.md` 并核对实际编号。以下命令会发布新评论。
+
+```powershell
+# 将 123 替换为待更新的 Issue 编号。
+$issue = 123
+gh issue comment $issue --repo $repo --body-file .\evidence.md
+```
+
+修改已有 Issue 时，可设置新标题，也可用 `--body-file` 提供已审阅的完整正文。只使用本次要改的选项。
+
+```powershell
+gh issue edit $issue --repo $repo --title $title
+# 仅修改正文时，使用已审阅的完整替换正文。
+# gh issue edit $issue --repo $repo --body-file .\issue.md
+```
+
+用 `gh issue view` 核对结果。创建 Issue 后，将 `$issue` 设为新 Issue URL 中的编号。
+
+```powershell
+gh issue view $issue --repo $repo --json url,title,body,state,issueType,labels
+```
 
 ## 6. 🤝 Pull Request
 

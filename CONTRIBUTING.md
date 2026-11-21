@@ -22,10 +22,14 @@ Attach bug evidence to the original Bug issue. Record task verification in the o
 
 Do not commit secrets, tokens, or local configuration.
 
-维护者的 Issue 和 PR 标题与正文采用项目维护交流语言。维护者撰写中文 Issue 时，在正文末尾附简短的 **English Summary**。中文 PR 的英文摘要按需添加。语言选择的优先级见工程手册。
+Issue 标题与正文可以使用不同语言。公开技术项目的维护者优先使用英文标题，项目可明确自己的约定。维护者的中文 Issue 正文末尾附简短的 **English Summary**。维护者的 PR 标题与正文采用项目维护交流语言，中文 PR 的英文摘要按需添加。
 
-Maintainers use the project's maintenance language for issue and PR titles and bodies. End maintainer-written Chinese issues with a brief **English Summary**. Add an English summary to Chinese PRs when it helps readers. See the engineering handbook for how to choose the language.
+An issue title and body can use different languages. Maintainers of public technical projects should prefer English titles, subject to the project's own policy. End a maintainer-written Chinese issue body with a brief **English Summary**. Maintainers use the project's maintenance language for PR titles and bodies, with an English summary for Chinese PRs when it helps readers.
 
 外部贡献者可用英文或简体中文提交 Issue 和 PR，英文摘要可选。全文翻译对所有人都是可选的。
 
 External contributors can use English or Simplified Chinese for issues and PRs, with an optional English summary. Full translations are optional for everyone.
+
+使用 GitHub 原生状态与关闭原因跟踪 Issue。语言和关闭细则以工程手册为准。
+
+Track issues with GitHub's native states and close reasons. See the engineering handbook for language and closure guidance.
