@@ -202,9 +202,17 @@ PR 标题和正文可用不同语言。维护者通常用简体中文写技术�
 
 用 PR 正文保留审查记录，说明改了什么、为什么改以及如何验证。按需补充兼容性、安全边界、已知限制和关联 Issue。最终提交标题遵循[提交说明约定](#4--提交说明)，保持简洁且可追溯。重要技术背景需要保留在 Git 历史时，再填写提交正文。
 
+这个 PR 要关闭某个 Issue 时，把 `Fixes #N` 或 `Closes #N` 写在 PR 说明里，不要写进提交标题。该 PR 合并后，GitHub 会关闭对应 Issue。提交正文需要给后来的读者留链接时，可以用 `Refs #N`。不要只为了装饰而写上 Issue 或 PR 编号。
+
+普通提交标题、Squash 标题和 PR 标题都不要追加 `(#11)` 这样的 Pull Request 编号。Conventional Commits 不要求标题里带编号。GitHub 界面也会把 Squash 提交关联到对应的 Pull Request，不依赖这个后缀。`(#N)` 只标明合并的是哪一个 PR，不会关闭 Issue，也不能代替 `Fixes #N` 或 `Closes #N`。很多仓库出现这个后缀，只是因为 Squash 模板选了 **Pull request title**，GitHub 会预填标题和编号。不要照搬这个预填。确认合并对话框里如果已有 `(#N)`，确认前删掉，让 `main` 保持一致。用过该模板时要删，多提交 Squash 的起点是一条已经带编号的 PR 标题时也要删。历史上已经带 `(#N)` 的标题保持原样，不要为了增删后缀而改写历史。
+
 一个 PR 只包含一个逻辑变更时，可用的合并方式中优先考虑 Squash and merge。开发中按需保留中间提交。独立提交需要长期保留在默认分支时，可选择仓库允许的其他合并方式。
 
 使用 GitHub 的 **Default message** 时，单提交 PR 以原提交的标题和正文作为初始内容，多提交 PR 则以 PR 标题和提交列表作为初始内容。准确的单提交信息可直接复用。Conventional Commits 风格的 PR 标题可减少多提交 Squash 的重复填写。合并前仍需检查预填标题，必要时按提交约定调整。默认格式不会提取 PR 正文中的自定义 Markdown 小节。无需另填 `Squash Summary`，也无需复制整份 PR 正文。参见 [GitHub 的 Squash 消息选项](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)。
+
+Squash 的默认消息按仓库设置。打开该仓库的 **Settings → General → Pull Requests**。在 **Allow squash merging** 下，把 **Default commit message** 设为 **Default message**。不要选择 **Pull request title and description**。这个选项会把 PR 正文，包括中文正文和 `## English Summary`，复制进默认分支的历史。也不要依赖 **Pull request title**。该模板会预填 `(#N)`，与上面的规则冲突。**Allow merge commits** 使用另一个下拉框。它的默认文案是 `Merge pull request #… from …`，这是合并提交的预填，不是 Squash 的预填。保持 **Allow merge commits** 开启，这样合并时仍可使用 **Create a merge commit**。需要把独立提交留在 `main` 上时就用它。RouteQuay PR #3 是一个例子。合并时再选择方式，然后检查预填标题。个人账户的 **Settings → Repositories** 只设置新仓库的默认分支名和提交评论的默认选项，没有合并方式或 Squash 消息的账户级开关。每个仓库单独设置一次。本手册和仓库模板都不能预先写好确认合并对话框。
+
+设置缺失、用了别的模板，或预填不对时，手工填写 Squash 消息。第一行必须符合[提交说明约定](#4--提交说明)，例如 `feat:`、`fix:` 或 `docs:`。不要把 `Merge pull request #… from …` 留作 Squash 标题。单提交 Squash 复用原提交的标题和正文，包括已有的 `Co-authored-by` 尾注。多提交 Squash 用一条 Conventional Commits 标题概括这一次逻辑变更。只有应当留在 Git 历史中的技术背景才写正文。不要把整份 PR 正文或其中的 `## English Summary` 粘进对话框。标题保持[提交说明约定](#4--提交说明)中的简洁英文。扩展说明（Extended description）可以用英文或简体中文，与提交正文相同。两种语言都可以。不要把英文扩展说明译成中文，也不要把中文扩展说明译成英文。英文标题加英文正文是有效写法，应当保留。近期由 Cursor 撰写的 RouteQuay Squash 就是例子。中文扩展说明同样有效。PathPilot 的一次 Squash 使用标题 `feat: add automatic Windows path discovery to setup plans`，正文用中文说明变更和测试结果，且没有 `(#N)`。确认前检查第一行。
 
 合并前核对实际差异、必要验证结果、合并就绪状态、最终提交信息以及作者和共同作者归属。Squash 后应保留必要的技术细节和已核实的贡献归属。
 
