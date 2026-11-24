@@ -70,14 +70,23 @@ type: short description
 | `ci` | Automation setup |
 | `style` | Formatting only |
 
-`feat`, `fix`, and `docs` cover most commits. Add `build`, `ci`, or `style` only when they fit. A published version is a tag, not a `release:` commit. Keep the subject imperative and about one line. Use an English type prefix. Maintainers should prefer a concise, precise English description in the subject. Use Chinese or English in the body for technical context, verification, compatibility, or rollback details when useful. One commit should be one coherent change.
+`feat`, `fix`, and `docs` cover most commits. Add `build`, `ci`, or `style` only when they fit. Mark published versions with tags and keep release preparation under the type that describes the work. For new commits in ForgottenLab’s public technical projects, use a short, imperative English Conventional Commits subject from the first `git commit`. Each commit should capture one coherent change. Keep accurate historical messages in their original language. This guidance applies to maintainers and development assistants, with project and upstream exceptions and no mandatory linting.
 
-The English subject preference is guidance. Existing Chinese commit subjects remain valid, and no commit language checks are required.
+Ordinary commits and squash commits use the same body rules. Decide from the actual change, regardless of the type prefix.
+
+- **Subject only.** Leave the body empty when the subject and diff explain the change and there is no lasting context to record. Common examples include typos, small documentation or UI changes, routine dependency updates, and fixes with an obvious cause.
+- **Subject and body.** Add one to three short paragraphs, or a few bullets, for non-obvious behavior or root causes, design or architecture decisions, compatibility, security or permissions, migration, rollback, or essential verification. Prefer concise English for new text and use Simplified Chinese when useful. Keep accurate existing text in its original language. Commit bodies have no fixed headings or translation requirement. Keep the PR template, `English Summary`, full test checklist, and handoff in their own records.
+- Preserve real, verified Git trailers, including existing valid `Co-authored-by` entries. Add attribution only when it is verified.
+
+**Subject only.** `fix: keep the Basic sidebar brand title unclipped` was the final [LaunchFlow #4](https://github.com/forgottenlab/launchflow/pull/4) message. Its Extended description was empty.
+
+**Technical body.** [RouteQuay #13’s original commit](https://github.com/forgottenlab/RouteQuay/commit/4a27e9dbebf90141d1330eeed203fe212d3f37f2) used this structure. The example paraphrases its body. The actual squash preserved the full original message and both verified trailers.
 
 ```text
-feat: add config export
-fix: prevent concurrent installer launches
-docs: clarify when to tag a version
+feat: group issued clients in local metadata
+
+Keep group membership on the operator’s machine and use it to select
+members for export. Editing a group leaves remote clients unchanged.
 ```
 
 ## 5. 💬 Issues
@@ -180,23 +189,45 @@ The PR title and body can use different languages. Maintainers usually write tec
 
 `.github/pull_request_template.md` prefills the description. A repository can provide its own pull request template to override this default.
 
-### Pull request descriptions and squash merges
+### Preparing the commit and pull request
 
-Use the PR description as the durable review record. Include what changed, why, and how it was verified. Add compatibility, safety boundaries, known limitations, and related issues when relevant. Keep the final commit subject concise and traceable, following the [commit conventions](#4--commits). Include a commit body when important technical context needs to stay in Git history.
+Keep each PR to one coherent change. Prefer one complete commit for a small fix, self-contained feature, or work that fits one commit. Multiple commits are fine for complex work, staged verification, or independently useful changes. Get authorization before amending, rebasing, or force-pushing. Before opening a PR, check the actual commit messages, commit count, and standalone PR body against their respective rules.
 
-When the pull request should close an Issue, put `Fixes #N` or `Closes #N` in the PR description, not in the commit subject. GitHub closes the Issue when that pull request is merged. A commit body may use `Refs #N` when the link helps a later reader. Do not add an issue or pull request number only for decoration.
+Use the PR body as the durable review record. Follow the [default PR template](../../.github/pull_request_template.md) or the project’s local template.
 
-Do not append a pull request number such as `(#11)` to an ordinary commit subject, a squash subject, or a PR title. Conventional Commits does not require a number in the subject. GitHub already links a squash commit to its pull request without the suffix. `(#N)` only records which pull request was merged. It does not close an Issue, and it is not a substitute for `Fixes #N` or `Closes #N`. Many projects get the suffix only because the **Pull request title** squash template prefills the title and the number. Do not copy that prefill. If the confirm-merge dialog contains `(#N)`, delete the suffix before confirming so `main` stays consistent. Do this when that template was used, and when a multi-commit squash starts from a PR title that already includes a number. Leave historical subjects that already contain `(#N)` unchanged. Do not rewrite history.
+- `## 改动 / What changed` is required. Describe the actual change and explain its reason or implementation when useful.
+- `## 检查 / How it was checked` is required. Report actual checks and results, including when tests were not run.
+- `## 范围与限制 / Scope and limitations` is optional. Keep it for compatibility, safety, unfinished work, or release boundaries. Remove it when irrelevant.
+- `## English Summary` comes last for primarily Chinese maintainer PRs. Remove it for English bodies. It is optional for external contributors.
 
-For a PR that represents one logical change, prefer Squash and merge where available. Keep intermediate commits during development as needed. Choose another allowed merge method when the individual commits need to remain in the default branch history.
+Small PRs can use one line per required section. Larger ones can add subheadings, lists, tables, or evidence under those sections. For example, [PathPilot #10](https://github.com/forgottenlab/pathpilot/pull/10) uses Chinese to explain the read-only setup preview and checks, states the limits of that preview, and closes with a short English summary.
 
-With GitHub's **Default message**, a one-commit PR starts with that commit's title and message. A PR with multiple commits starts with the PR title and a list of commits. Reuse an accurate single-commit message. A Conventional Commits-style PR title can save editing for a multi-commit squash. Check the proposed subject and revise it when needed to follow the commit conventions. The default format does not extract custom Markdown sections from the PR description. A separate `Squash Summary` section and copying the whole PR description are unnecessary. See [GitHub's squash message options](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests).
+When a PR targets the default branch and should close an Issue, put `Fixes #N` or `Closes #N` in its body. Use `Refs #N` in a commit body when the link helps future readers.
 
-Set the squash message on each repository. Open **Settings → General → Pull Requests**. Under **Allow squash merging**, set **Default commit message** to **Default message**. Do not choose **Pull request title and description**. It would copy the PR body, including a Chinese body and `## English Summary`, into default-branch history. Do not rely on **Pull request title** either. That template prefills `(#N)` and conflicts with the rule above. **Allow merge commits** has a separate dropdown. Its default text is `Merge pull request #… from …`, which is the merge-commit prefill, not the squash prefill. Keep **Allow merge commits** enabled so **Create a merge commit** remains available. Independent commits that should stay on `main` still use it. RouteQuay PR #3 is one example. Pick the method at merge time, then check the prefilled subject. A personal account's **Settings → Repositories** only sets the default branch name for new repositories and the commit-comment defaults. It has no merge-method or squash-message switch, so set each repository once. This handbook and the repository templates cannot pre-write the confirm-merge dialog.
+### Squash messages
 
-When the setting is missing, a different template was used, or the prefill is wrong, write the squash message by hand. The first line must follow the [commit conventions](#4--commits), for example `feat:`, `fix:`, or `docs:`. Never leave `Merge pull request #… from …` as a squash subject. For a one-commit squash, reuse the original commit title and body, including any existing `Co-authored-by` trailers. For a multi-commit squash, write one Conventional Commit subject that summarizes the single logical change. Add a body only for technical context that should remain in Git history. Do not paste the whole PR body or its `## English Summary` into the box. The subject stays concise English, as in the [commit conventions](#4--commits). The Extended description may be English or Simplified Chinese, the same as a commit body. Either language is fine. Do not translate an English Extended description into Chinese, or a Chinese one into English. An English subject and English body are valid and should be kept. Recent Cursor-authored RouteQuay squashes are an example. A Chinese Extended description is also valid. One PathPilot squash used the subject `feat: add automatic Windows path discovery to setup plans`, a Chinese body describing the change and the test results, and no `(#N)` suffix. Check the first line before confirming.
+For one logical change, consider Squash and merge. Keep the native merge option for changes whose commits should remain independently visible. Keep **Default message** as the per-repository squash setting under **Settings → General → Pull Requests**. GitHub’s native merge-commit prefill (`Merge pull request #… from …`) remains valid for a regular merge.
 
-Before merging, confirm the actual diff, necessary checks, merge readiness, final commit message, and author and co-author attribution. Preserve technical details and verified attribution that need to survive the squash.
+| GitHub squash setting | Prefill |
+|---|---|
+| **Default message**, one commit | Original commit subject and body |
+| **Default message**, multiple commits | PR title and commit list |
+| **Pull request title and description** | PR title and body |
+
+Treat the prefill as a starting point. Use one concise English Conventional Commits subject for the logical change. Leave `(#N)` off new ordinary commit subjects and PR titles, and remove a prefilled suffix before confirming a squash. Keep existing history intact. See [GitHub’s squash message options](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests).
+
+- **One commit.** Reuse the complete message when it follows the [commit rules](#4--commits). An empty original body can leave **Extended description** blank. Keep useful technical context in its existing language. Make minimal edits for inaccuracy, duplication, stray PR headings, or irrelevant intermediate notes. Retain any unique details from an English summary and preserve valid Git trailers.
+- **Multiple commits.** Write one subject for the whole change. Add an Extended description only when the [same body rules](#4--commits) call for it. Synthesize durable facts from the diff and commits. Leave out the generated commit list, the full PR body, and standalone Squash or English summary sections.
+
+**Reuse example.** [PathPilot #11](https://github.com/forgottenlab/pathpilot/pull/11) landed with `feat: add automatic Windows path discovery to setup plans` and a Chinese body covering discovery priority, safety checks, and the read-only boundary. If a single original commit already contains accurate technical context like this, reuse it in Chinese. In the actual PR the original commit had no body, and the final squash added that context.
+
+Before confirming, check the diff, verification, merge readiness, final message, and author and co-author attribution.
+
+### Guidance for development assistants
+
+Before the first commit, read the project’s applicable instructions and its referenced commit rules. In a handoff, identify the record you are preparing. For a PR, provide **PR Title** and **PR Body**. For a squash, provide **Commit message** and **Extended description**, explicitly say to leave the description blank when appropriate, and supply one copy-ready version. Apply the same workflow across assistants.
+
+GitHub uses the [central community defaults](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file) for supported files when a project does not supply its own. Those defaults are served by GitHub and are absent from the project clone. For assistant discovery, link this handbook’s commit and PR sections from instructions the chosen assistant actually loads, or include the links in the task and ask it to read them before committing.
 
 ### Contributing to other projects
 

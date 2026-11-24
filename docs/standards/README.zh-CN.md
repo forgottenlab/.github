@@ -82,14 +82,23 @@ type: 简短说明
 | `ci` | 自动化配置 |
 | `style` | 只改格式 |
 
-日常大多只用 `feat`、`fix` 和 `docs`。`build`、`ci`、`style` 在确实匹配时再用。发布用标签表示，不使用 `release:` 作为提交类型。标题用祈使语气，一行能读完。类型前缀保持英文，维护者的标题描述优先使用简洁、准确的英文。正文可用中文或英文，按需说明技术背景、验证结果、兼容性和回滚事项。一次提交做一件连贯的事。
+日常大多只用 `feat`、`fix` 和 `docs`。`build`、`ci`、`style` 在确实匹配时再用。用标签标记发布版本，并按实际工作选择发布准备提交的类型。ForgottenLab 自有公开技术项目从第一次执行 `git commit` 起，就使用简洁、准确、祈使语气的英文 Conventional Commits 标题。每次提交记录一个连贯的变更。准确的历史提交保留原有语言。此约定同样适用于维护者和开发助手，遵循项目及上游例外，不设强制检查。
 
-英文标题是默认建议。既有中文标题继续有效，不设强制的提交语言校验。
+普通提交与 Squash 提交使用同一套正文判断规则。根据实际变更决定是否填写，类型前缀不决定正文长度。
+
+- **只写标题。** 标题与差异已经说明变更，且没有需要长期保留的背景时，正文留空。常见情况包括拼写修正、小型文档或 UI 调整、常规依赖更新，以及原因明确的小修复。
+- **标题加正文。** 有非显然行为或根因、设计或架构决定、兼容性、安全或权限边界、迁移、回滚或关键验证时，用一至三个短段落或少量项目符号记录。新写的正文优先简洁英文，必要时可用简体中文。准确的已有正文保留原有语言。提交正文无需固定标题或翻译。PR 模板、`English Summary`、完整测试清单和任务交接各自保留在适用的记录中。
+- 保留真实且已核实的 Git trailers，包括有效的 `Co-authored-by`。只有核实了实际归属才添加归属信息。
+
+**只写标题。** [LaunchFlow #4](https://github.com/forgottenlab/launchflow/pull/4) 的最终提交消息为 `fix: keep the Basic sidebar brand title unclipped`，Extended description 留空。
+
+**技术正文。** [RouteQuay #13 的原始提交](https://github.com/forgottenlab/RouteQuay/commit/4a27e9dbebf90141d1330eeed203fe212d3f37f2) 采用以下结构，示例正文为转述。实际 Squash 保留了完整原消息和两条已核实的 trailers。
 
 ```text
-feat: add config export
-fix: prevent concurrent installer launches
-docs: clarify when to tag a version
+feat: group issued clients in local metadata
+
+Keep group membership on the operator’s machine and use it to select
+members for export. Editing a group leaves remote clients unchanged.
 ```
 
 ## 5. 💬 Issue
@@ -198,23 +207,45 @@ PR 标题和正文可用不同语言。维护者通常用简体中文写技术�
 
 `.github/pull_request_template.md` 预填 PR 说明。项目可提供自己的 Pull Request 模板以覆盖默认模板。
 
-### PR 说明与 Squash 合并
+### 准备提交与 PR
 
-用 PR 正文保留审查记录，说明改了什么、为什么改以及如何验证。按需补充兼容性、安全边界、已知限制和关联 Issue。最终提交标题遵循[提交说明约定](#4--提交说明)，保持简洁且可追溯。重要技术背景需要保留在 Git 历史时，再填写提交正文。
+一个 PR 对应一个连贯的逻辑变更。小型修复、独立功能或适合一次提交的工作优先形成一个完整提交。复杂开发、阶段性验证或有独立保留价值的改动可以用多个提交。执行 amend、rebase 或 force push 前须获得授权。创建 PR 前，分别核对实际提交消息、提交数量和独立撰写的 PR 正文。
 
-这个 PR 要关闭某个 Issue 时，把 `Fixes #N` 或 `Closes #N` 写在 PR 说明里，不要写进提交标题。该 PR 合并后，GitHub 会关闭对应 Issue。提交正文需要给后来的读者留链接时，可以用 `Refs #N`。不要只为了装饰而写上 Issue 或 PR 编号。
+PR 正文用于保留审查记录。使用[中央 PR 模板](../../.github/pull_request_template.md)或项目自己的模板。
 
-普通提交标题、Squash 标题和 PR 标题都不要追加 `(#11)` 这样的 Pull Request 编号。Conventional Commits 不要求标题里带编号。GitHub 界面也会把 Squash 提交关联到对应的 Pull Request，不依赖这个后缀。`(#N)` 只标明合并的是哪一个 PR，不会关闭 Issue，也不能代替 `Fixes #N` 或 `Closes #N`。很多仓库出现这个后缀，只是因为 Squash 模板选了 **Pull request title**，GitHub 会预填标题和编号。不要照搬这个预填。确认合并对话框里如果已有 `(#N)`，确认前删掉，让 `main` 保持一致。用过该模板时要删，多提交 Squash 的起点是一条已经带编号的 PR 标题时也要删。历史上已经带 `(#N)` 的标题保持原样，不要为了增删后缀而改写历史。
+- `## 改动 / What changed` 为固定章节。说明实际改动，按需补充原因或实现方式。
+- `## 检查 / How it was checked` 为固定章节。如实记录检查和结果，未运行测试也应说明。
+- `## 范围与限制 / Scope and limitations` 为可选章节。有兼容性、安全边界、未完成事项或发布限制时填写，否则删除。
+- `## English Summary` 放在以中文为主的维护者 PR 正文末尾。全英文正文删除该章节，外部贡献者可按需填写。
 
-一个 PR 只包含一个逻辑变更时，可用的合并方式中优先考虑 Squash and merge。开发中按需保留中间提交。独立提交需要长期保留在默认分支时，可选择仓库允许的其他合并方式。
+小型 PR 可在固定章节各写一条。较大 PR 可在这些章节下使用子标题、列表、表格或证据。例如 [PathPilot #10](https://github.com/forgottenlab/pathpilot/pull/10) 用中文说明只读初始化预览及检查，记录预览的限制，末尾附简短英文摘要。
 
-使用 GitHub 的 **Default message** 时，单提交 PR 以原提交的标题和正文作为初始内容，多提交 PR 则以 PR 标题和提交列表作为初始内容。准确的单提交信息可直接复用。Conventional Commits 风格的 PR 标题可减少多提交 Squash 的重复填写。合并前仍需检查预填标题，必要时按提交约定调整。默认格式不会提取 PR 正文中的自定义 Markdown 小节。无需另填 `Squash Summary`，也无需复制整份 PR 正文。参见 [GitHub 的 Squash 消息选项](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)。
+PR 面向默认分支且应关闭某个 Issue 时，把 `Fixes #N` 或 `Closes #N` 写在 PR 正文。提交正文需要给后来的读者留链接时，可以用 `Refs #N`。
 
-Squash 的默认消息按仓库设置。打开该仓库的 **Settings → General → Pull Requests**。在 **Allow squash merging** 下，把 **Default commit message** 设为 **Default message**。不要选择 **Pull request title and description**。这个选项会把 PR 正文，包括中文正文和 `## English Summary`，复制进默认分支的历史。也不要依赖 **Pull request title**。该模板会预填 `(#N)`，与上面的规则冲突。**Allow merge commits** 使用另一个下拉框。它的默认文案是 `Merge pull request #… from …`，这是合并提交的预填，不是 Squash 的预填。保持 **Allow merge commits** 开启，这样合并时仍可使用 **Create a merge commit**。需要把独立提交留在 `main` 上时就用它。RouteQuay PR #3 是一个例子。合并时再选择方式，然后检查预填标题。个人账户的 **Settings → Repositories** 只设置新仓库的默认分支名和提交评论的默认选项，没有合并方式或 Squash 消息的账户级开关。每个仓库单独设置一次。本手册和仓库模板都不能预先写好确认合并对话框。
+### Squash 提交消息
 
-设置缺失、用了别的模板，或预填不对时，手工填写 Squash 消息。第一行必须符合[提交说明约定](#4--提交说明)，例如 `feat:`、`fix:` 或 `docs:`。不要把 `Merge pull request #… from …` 留作 Squash 标题。单提交 Squash 复用原提交的标题和正文，包括已有的 `Co-authored-by` 尾注。多提交 Squash 用一条 Conventional Commits 标题概括这一次逻辑变更。只有应当留在 Git 历史中的技术背景才写正文。不要把整份 PR 正文或其中的 `## English Summary` 粘进对话框。标题保持[提交说明约定](#4--提交说明)中的简洁英文。扩展说明（Extended description）可以用英文或简体中文，与提交正文相同。两种语言都可以。不要把英文扩展说明译成中文，也不要把中文扩展说明译成英文。英文标题加英文正文是有效写法，应当保留。近期由 Cursor 撰写的 RouteQuay Squash 就是例子。中文扩展说明同样有效。PathPilot 的一次 Squash 使用标题 `feat: add automatic Windows path discovery to setup plans`，正文用中文说明变更和测试结果，且没有 `(#N)`。确认前检查第一行。
+一个逻辑变更可优先考虑 Squash and merge。需要让独立提交在默认分支可见时，保留普通 Merge 方式。每个仓库在 **Settings → General → Pull Requests** 中继续推荐将 Squash 消息设为 **Default message**。GitHub 的普通 Merge Commit 预填格式（`Merge pull request #… from …`）仍适用于普通合并。
 
-合并前核对实际差异、必要验证结果、合并就绪状态、最终提交信息以及作者和共同作者归属。Squash 后应保留必要的技术细节和已核实的贡献归属。
+| GitHub Squash 设置 | 预填内容 |
+|---|---|
+| **Default message**，单提交 | 原提交标题和正文 |
+| **Default message**，多提交 | PR 标题和提交列表 |
+| **Pull request title and description** | PR 标题和正文 |
+
+从预填内容起草一条概括逻辑变更的简洁英文 Conventional Commits 标题。普通提交标题与 PR 标题不追加 `(#N)` 形式的后缀，确认 Squash 前删除预填的 `(#N)`。保留历史消息。参见 [GitHub 的 Squash 消息选项](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests)。
+
+- **单提交。** 如果符合[提交规则](#4--提交说明)，完整复用原消息。原提交正文为空且符合留空条件时，**Extended description** 留空。保留有用技术信息及原语言。仅对不准确、重复、无关的 PR 段落或中间记录做最小调整。英文摘要中的独有信息应保留或整合，有效的 Git trailers 应保留。
+- **多提交。** 用一个标题概括整个变更。按[同一套正文规则](#4--提交说明)判断是否填写 Extended description。从实际差异和原始提交提炼长期有用的信息。省去自动生成的提交列表、整份 PR 正文和独立的 Squash 或英文摘要章节。
+
+**复用示例。** [PathPilot #11](https://github.com/forgottenlab/pathpilot/pull/11) 最终使用 `feat: add automatic Windows path discovery to setup plans`，以中文说明发现顺序、安全检查和只读边界。如果单条原始提交已准确说明这类技术背景，保留其中文正文。该 PR 的实际原始提交没有正文，这些背景由最终 Squash 补入。
+
+确认合并前核对实际差异、验证结果、合并就绪状态、最终提交消息、作者和共同作者归属。
+
+### 开发助手的操作指引
+
+从首次提交起，阅读项目适用的指令及其引用的提交规范。交接时明确所准备的记录类型。准备 PR 时提供 **PR Title** 和 **PR Body**。准备 Squash 时提供 **Commit message** 和 **Extended description**。正文应留空时直接说明留空，只给一套可复制的填写内容。所有开发助手采用相同流程。
+
+当项目缺少相应文件时，GitHub 为受支持的文件提供[中央社区默认文件](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)。这些默认文件由 GitHub 提供，不会出现在项目克隆中。要让开发助手找到规则，可在所用助手实际读取的项目指令中链接本手册的提交与 PR 章节，或在任务中明确附链接并要求提交前阅读。
 
 ### 向外部项目贡献
 

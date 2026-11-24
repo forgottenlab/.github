@@ -34,6 +34,10 @@ Maintainers should prefer concise English PR titles with a Conventional Commits 
 
 External contributors can use English or Simplified Chinese for issues and PRs, with an optional English summary. Full translations are optional for everyone.
 
+首次提交前阅读工程手册的提交与 PR 章节。小型变更的提交正文可留空，复杂变更优先用简短英文记录长期有用的技术背景。创建 PR 前分别核对提交消息和 PR 正文。建议在开发助手实际读取的项目指令或任务中链接手册。
+
+Read the handbook’s commit and PR sections before the first commit. A simple change can use a subject alone. For a complex change, prefer a brief English body for durable technical context. Review commit messages and the PR body separately before opening the PR. Link the handbook in the task or project instructions that the assistant reads.
+
 使用 GitHub 原生状态与关闭原因跟踪 Issue。语言和关闭细则以工程手册为准。
 
 Track issues with GitHub's native states and close reasons. See the engineering handbook for language and closure guidance.
